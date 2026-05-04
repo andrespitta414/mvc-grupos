@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Contactos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- PARTE 3 - VISTA FRONTEND -->
+    <!-- Esta vista usa Jinja2 para mostrar los contactos enviados desde Flask. -->
+
+    <main class="contenedor">
+        <h1>Directorio de Contactos</h1>
+
+        <section class="panel">
+            <h2>Registrar Contacto</h2>
+            <form action="/add" method="POST" class="formulario">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: Maria Lopez">
+
+                <label for="telefono">Telefono</label>
+                <input type="text" id="telefono" name="telefono" placeholder="Ej: 3151234567">
+
+                <button type="submit">Guardar</button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Buscar Contactos</h2>
+            <form action="/search" method="GET" class="busqueda">
+                <input type="text" name="q" placeholder="Buscar por nombre">
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Lista de Contactos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contacto in contactos %}
+                    <tr>
+                        <td>{{ contacto.id }}</td>
+                        <td>{{ contacto.nombre }}</td>
+                        <td>{{ contacto.telefono }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
